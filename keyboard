@@ -1,0 +1,30 @@
+#!/bin/bash
+
+fKey=$1
+SEAT_NAME=$2
+
+READ_DEVICES=read-devices
+
+KEYBOARDS=$(discover-devices kevdev | cut -f2)
+
+# get keyboard that has an input
+#PRESSED=$(read-devices $fKey $KEYBOARDS | grep '^detect' | cut -d '|' -f2)
+#SYS_DEV=/sys$(udevadm info $PRESSED | grep 'P:' | cut -d ' ' -f2- | sed -r 's/event.*$//g')
+
+# show the keyboard
+#echo -n "Keyboard: $SYS_DEV"
+
+#loginctl attach $SEAT_NAME $SYS_DEV
+
+CREATED=0
+while (( ! CREATED )); do
+
+	# See if someone presses the key:
+	PRESSED=$($READ_DEVICES $fKey $KEYBOARDS | grep '^detect' | cut -d'|' -f2)
+
+	# show the keyboard
+	echo -n "Keyboard: $SYS_DEV"
+
+	CREATED=1
+
+done
