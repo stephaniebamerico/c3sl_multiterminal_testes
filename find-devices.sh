@@ -74,7 +74,7 @@ fMouse () {
 		LOCK_EXISTS=1
 		while (( LOCK_EXISTS )); do
 		    # creates lock to prevent someone from creating while checking
-		    touch ${MDM_DEVICES}/lock${SEAT_DISPLAY}
+		    touch ${MC3SL_DEVICES}/lock${fKey}
 		    LOCK_EXISTS=0
 		    
 		    # check if another lock exists
