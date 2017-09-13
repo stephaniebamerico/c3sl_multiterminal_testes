@@ -6,7 +6,6 @@ set -x
 export PATH=$PATH:$(pwd)
 
 WRITE_ME=writeWindow
-WRITE_ALL=writeMode
 READ_DEVICES=read-devices
 
 fKeyboard () {
@@ -73,7 +72,9 @@ fMouse () {
 
 		# Create the lock
 		LOCK_EXISTS=1
-		while (( LOCK_EXISTS )); do		    
+		while (( LOCK_EXISTS )); do
+		    # creates lock to prevent someone from creating while checking
+		    touch ${MDM_DEVICES}/lock${SEAT_DISPLAY}
 		    LOCK_EXISTS=0
 		    
 		    # check if another lock exists
@@ -82,17 +83,17 @@ fMouse () {
 			    	LOCK_EXISTS=1
 				fi
 		    done
-		    
+
+		    # if another lock exists, wait until it is not removed
 		    if (( LOCK_EXISTS )); then
+				display_message wait
+				rm -f ${MC3SL_DEVICES}/lock${fKey}
 				sleep 1;
-			else
-				touch ${MC3SL_DEVICES}/lock${fKey}
 		    fi
 		done
 
 		# Now we have the lock!
 		$WRITE_ME press_mouse $wNum
-		$WRITE_ALL wait_load $wNum
 
 		# See if someone presses the button:
 		PRESSED=$($READ_DEVICES 13 $MICE | grep '^detect' | cut -d'|' -f2)
@@ -105,7 +106,6 @@ fMouse () {
 		if [ "$PRESSED" = 'timeout' ]; then
 		    # Give other machines the opportunity to enter the lock
 		    rm -f ${MC3SL_DEVICES}/lock${fKey}
-		    $WRITE_ALL press_key -1
 		    TIMEOUT=1
 		    continue
 		fi

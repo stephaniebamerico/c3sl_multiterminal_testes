@@ -87,18 +87,6 @@ writeWindow() {
     esac
 }
 
-writeMode() {
-	message=$1
-	exception=$2
-
-	for window in `seq 0 $(($nWindow-1))`;
-	do
-		if [[ $window -ne $exception ]]; then
-			writeWindow $message $window
-		fi
-	done
-}
-
 getSeat() {
 	# find out which seat belongs
 	case $1 in
@@ -128,7 +116,7 @@ find_device () {
 		$FIND_KEYBOARD $(($window+1)) $SEAT_NAME &
 		pidFindDevices[$window]=$!
 
-		#writeWindow press_key $window
+		writeWindow press_key $window
 	done
 }
 
@@ -149,8 +137,6 @@ sleep 1 # making sure that Xorg is up
 createWindow
 
 find_device
-
-writeMode press_key -1
 
 read x
 
