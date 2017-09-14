@@ -61,7 +61,7 @@ fMouse () {
 
 	CREATED=0
 	TIMEOUT=0
-    while (( ! CREATED && ! TIMEOUT )); do
+    while (( ! $CREATED && ! $TIMEOUT )); do
 		MICE=$($DISCOVER_DEVICES mevdev | cut -f2)
 
 		if [ -z "$MICE" ]; then
@@ -117,8 +117,9 @@ fMouse () {
 		rm -f ${MC3SL_DEVICES}/lock${fKey}
     done
 
-    if [ CREATED && -n "$SYS_DEV" ]; then 
+    if [ $CREATED && -n "$SYS_DEV" ]; then 
 		# show the mouse
+		echo "************************************************"
 		echo -n "Mouse:" $SYS_DEV
 
 		loginctl attach $SEAT_NAME $SYS_DEV
