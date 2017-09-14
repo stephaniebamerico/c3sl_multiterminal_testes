@@ -86,7 +86,7 @@ fMouse () {
 
 		    # if another lock exists, wait until it is not removed
 		    if (( LOCK_EXISTS )); then
-				display_message wait
+				$WRITE_ME wait_load $wNum
 				rm -f ${MC3SL_DEVICES}/lock${fKey}
 				sleep 1;
 		    fi
