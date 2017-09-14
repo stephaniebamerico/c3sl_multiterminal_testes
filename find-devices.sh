@@ -72,6 +72,7 @@ fMouse () {
 
 		# Create the lock
 		LOCK_EXISTS=1
+		$WRITE_ME wait_load $wNum
 		while (( LOCK_EXISTS )); do
 		    # creates lock to prevent someone from creating while checking
 		    touch ${MC3SL_DEVICES}/lock${fKey}
@@ -86,7 +87,6 @@ fMouse () {
 
 		    # if another lock exists, wait until it is not removed
 		    if (( LOCK_EXISTS )); then
-				$WRITE_ME wait_load $wNum
 				rm -f ${MC3SL_DEVICES}/lock${fKey}
 				sleep 1;
 		    fi
@@ -125,6 +125,7 @@ fMouse () {
 
 		exit 1
 	else
+		$WRITE_ME press_key $wNum
 		fKeyboard $fKey $SEAT_NAME
 	fi
 }
