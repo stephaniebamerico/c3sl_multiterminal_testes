@@ -117,7 +117,7 @@ fMouse () {
 		rm -f ${MC3SL_DEVICES}/lock${fKey}
     done
 
-    if [ $CREATED -eq 1 && -n "$SYS_DEV" ]; then 
+    if [[ "$CREATED" -eq 1 && -n "$SYS_DEV" ]]; then 
 		# show the mouse
 		echo "************************************************"
 		echo -n "Mouse:" $SYS_DEV
