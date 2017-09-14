@@ -130,7 +130,7 @@ createWindow
 displayXorgs[$nWindow]=:90
 export DISPLAY=${displayXorgs[$nWindow]}
 Xorg ${displayXorgs[$nWindow]} -seat __fake-seat-1__ -dpms -s 0 -nocursor &
-pidXorgs[$nWindow]=$!
+#pidXorgs[$nWindow]=$!
 sleep 1 # making sure that Xorg is up
 ### TO-DO end
 
