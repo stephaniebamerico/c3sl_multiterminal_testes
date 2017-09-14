@@ -41,7 +41,6 @@ fKeyboard () {
 
 	if [ -n "$SYS_DEV" ]; then 
 		# show the keyboard
-		echo "************************************************"
 		echo -n "Keyboard:" $SYS_DEV
 
 		loginctl attach $SEAT_NAME $SYS_DEV
@@ -119,10 +118,11 @@ fMouse () {
 
     if [[ "$CREATED" -eq 1 && -n "$SYS_DEV" ]]; then 
 		# show the mouse
-		echo "************************************************"
 		echo -n "Mouse:" $SYS_DEV
 
 		loginctl attach $SEAT_NAME $SYS_DEV
+
+		$WRITE_ME ok $wNum
 
 		exit 1
 	else
