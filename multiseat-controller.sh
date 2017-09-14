@@ -138,8 +138,6 @@ createWindow
 
 find_device
 
-read x
-
 for device in `seq 0 $(($nWindow-1))`;
 do
     wait ${pidFindDevices[$device]}
@@ -166,6 +164,6 @@ do
 	fi
 done
 
-#systemctl start lightdm
+systemctl start lightdm
 
 exit 0
