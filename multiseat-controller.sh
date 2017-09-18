@@ -137,7 +137,7 @@ Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 -noxv -output VG
 sleep 1
 createWindow
 
-Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 -noxv -output LVDS :2 -seat seat-L0 -auth /var/run/lightdm/root/:2 -nolisten tcp &
+Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 -noxv -output DP-3 :2 -seat seat-L0 -auth /var/run/lightdm/root/:2 -nolisten tcp &
 #pidXorgs[$nWindow]=$!
 sleep 1 # making sure that Xorg is up
 createWindow
