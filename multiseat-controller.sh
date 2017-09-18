@@ -51,7 +51,7 @@ execX () {
 createWindow () {
 	# get screen resolution
 	screenResolutionX=$(( $(xdpyinfo -display ${displayXorgs[$nWindow]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/' | cut -d'x' -f1) / $(($nWindow+1)) ))
-	screenResolutionY=x$(xdpyinfo -display :10 | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/' | cut -d'x' -f2)
+	screenResolutionY=x$(xdpyinfo -display ${displayXorgs[$nWindow]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/' | cut -d'x' -f2)
 	screenResolution=$screenResolutionX$screenResolutionY
 
 	window_name=w$(($nWindow+1))
@@ -130,11 +130,19 @@ createWindow
 displayXorgs[$nWindow]=:90
 export DISPLAY=${displayXorgs[$nWindow]}
 Xorg ${displayXorgs[$nWindow]} -seat __fake-seat-1__ -dpms -s 0 -nocursor &
+#pidXorgs[$nWindow]=$! #nao criar janela, entao nao incrementar nWindow e vai dar errado...
+
+Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 -noxv -output VGA :0 -seat seat-V0 -auth /var/run/lightdm/root/:0 -nolisten tcp &
+#pidXorgs[$nWindow]=$!
+sleep 1
+createWindow
+
+Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 -noxv -output LVDS :2 -seat seat-L0 -auth /var/run/lightdm/root/:2 -nolisten tcp &
 #pidXorgs[$nWindow]=$!
 sleep 1 # making sure that Xorg is up
-### TO-DO end
-
 createWindow
+
+### TO-DO end
 
 find_device
 
