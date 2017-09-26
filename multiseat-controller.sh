@@ -35,7 +35,6 @@ declare -a displayXorgs
 declare -a pidFindDevices
 declare -a returnValue
 
-
 execX () {
 	displayXorgs[$nWindow]=$1
 
@@ -92,18 +91,14 @@ getSeat() {
 	case $1 in
 	:10) 
 		SEAT_NAME=seat0 ;;
-	:90) 
+	:11) 
 		if [[ $(loginctl list-seats | grep seat-V0 | wc -l) -eq 1 ]]; then
 			SEAT_NAME=seat-V0
-		elif  [[ $(loginctl list-seats | grep seat-L0 | wc -l) -eq 1 ]]; then
-			SEAT_NAME=seat-L0
 		else echo "CAN NOT FIND SEAT"
 		fi ;;
-	:90.1) 
-		if [[ $(loginctl list-seats | grep seat-V1 | wc -l) -eq 1 ]]; then
-			SEAT_NAME=seat-V1
-		elif  [[ $(loginctl list-seats | grep seat-L1 | wc -l) -eq 1 ]]; then
-			SEAT_NAME=seat-L1
+	:12) 
+		if [[ $(loginctl list-seats | grep seat-L0 | wc -l) -eq 1 ]]; then
+			SEAT_NAME=seat-L0
 		else echo "CAN NOT FIND SEAT"
 		fi ;;
     esac
@@ -122,27 +117,32 @@ find_device () {
 
 systemctl stop lightdm
 
+### TO-DO: o melhor jeito é garantir que o xorg-daemon.service rode antes
+Xorg :90 -seat __fake-seat-1__ &
+#pidXorgs[$nWindow]=$! #nao criar janela, entao nao incrementar nWindow e vai dar errado...
+sleep 1
+### TO-DO end
+
+FAKE_DISPLAY=:$(ps aux | grep Xorg | cut -d ":" -f4 | cut -d " " -f1)
+export DISPLAY=$FAKE_DISPLAY
+
+while read -r outputD
+do
+	displayXorgs[$nWindow]=:$(($nWindow+10))
+    seatD=seat-${outputD:0:1}0
+
+	Xephyr -output $outputD ${displayXorgs[$nWindow]} -seat $seatD &
+	export DISPLAY=${displayXorgs[$nWindow]}
+	createWindow
+
+	export DISPLAY=$FAKE_DISPLAY
+done < "$(xrandr | grep connect | cut -d " " -f1)"
+
+sleep 1 # making sure that Xorg is up
+
 execX :10
 
 createWindow
-
-### TO-DO: o melhor jeito é garantir que o xorg-daemon.service rode antes
-displayXorgs[$nWindow]=:90
-export DISPLAY=${displayXorgs[$nWindow]}
-Xorg ${displayXorgs[$nWindow]} -seat __fake-seat-1__ -dpms -s 0 -nocursor &
-#pidXorgs[$nWindow]=$! #nao criar janela, entao nao incrementar nWindow e vai dar errado...
-
-Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 -noxv -output VGA :0 -seat seat-V0 -auth /var/run/lightdm/root/:0 -nolisten tcp &
-#pidXorgs[$nWindow]=$!
-sleep 1
-createWindow
-
-Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 -noxv -output LVDS :2 -seat seat-L0 -auth /var/run/lightdm/root/:2 -nolisten tcp &
-#pidXorgs[$nWindow]=$!
-sleep 1 # making sure that Xorg is up
-createWindow
-
-### TO-DO end
 
 find_device
 
