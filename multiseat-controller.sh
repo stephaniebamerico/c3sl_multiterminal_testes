@@ -126,10 +126,12 @@ sleep 1
 FAKE_DISPLAY=:$(ps aux | grep Xorg | cut -d ":" -f4 | cut -d " " -f1)
 export DISPLAY=$FAKE_DISPLAY
 
-while read -r outputD
-do
+while read -r outputD; do
+	echo "##### $outputD"
 	displayXorgs[$nWindow]=:$(($nWindow+10))
+	echo "### display: ${displayXorgs[$nWindow]}"
     seatD=seat-${outputD:0:1}0
+    echo "### display: $seatD"
 
 	Xephyr -output $outputD ${displayXorgs[$nWindow]} -seat $seatD &
 	export DISPLAY=${displayXorgs[$nWindow]}
