@@ -126,7 +126,8 @@ sleep 1
 FAKE_DISPLAY=:$(ps aux | grep Xorg | cut -d ":" -f4 | cut -d " " -f1)
 export DISPLAY=$FAKE_DISPLAY
 
-while read -r outputD; do
+cat "$(xrandr | grep connect | cut -d " " -f1)" | \
+while read outputD; do
 	echo "##### $outputD"
 	displayXorgs[$nWindow]=:$(($nWindow+10))
 	echo "### display: ${displayXorgs[$nWindow]}"
@@ -138,7 +139,7 @@ while read -r outputD; do
 	createWindow
 
 	export DISPLAY=$FAKE_DISPLAY
-done < "$(xrandr | grep connect | cut -d " " -f1)"
+done
 
 sleep 1 # making sure that Xorg is up
 
