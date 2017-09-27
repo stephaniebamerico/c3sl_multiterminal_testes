@@ -49,7 +49,7 @@ execX () {
 
 createWindow () {
 	# get screen resolution
-	screenResolutionX=$(( $(xdpyinfo -display ${displayXorgs[$nWindow]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/' | cut -d'x' -f1) / $(($nWindow+1)) ))
+	screenResolutionX=$(xdpyinfo -display ${displayXorgs[$nWindow]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/' | cut -d'x' -f1) #/ $(($nWindow+1)) ))
 	screenResolutionY=x$(xdpyinfo -display ${displayXorgs[$nWindow]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/' | cut -d'x' -f2)
 	screenResolution=$screenResolutionX$screenResolutionY
 
@@ -118,6 +118,7 @@ find_device () {
 systemctl stop lightdm
 
 ### TO-DO: o melhor jeito é garantir que o xorg-daemon.service rode antes
+
 Xorg :90 -seat __fake-seat-1__ &
 #pidXorgs[$nWindow]=$! #nao criar janela, entao nao incrementar nWindow e vai dar errado...
 sleep 1
@@ -126,24 +127,24 @@ sleep 1
 FAKE_DISPLAY=:$(ps aux | grep Xorg | cut -d ":" -f4 | cut -d " " -f1)
 export DISPLAY=$FAKE_DISPLAY
 
-cat "$(xrandr | grep connect | cut -d " " -f1)" | \
-while read outputD; do
+while read -r outputD ; do
 	echo "##### $outputD"
 	displayXorgs[$nWindow]=:$(($nWindow+10))
 	echo "### display: ${displayXorgs[$nWindow]}"
-    seatD=seat-${outputD:0:1}0
-    echo "### display: $seatD"
+	seatD=seat-${outputD:0:1}0
+	echo "### display: $seatD"	
 
 	Xephyr -output $outputD ${displayXorgs[$nWindow]} -seat $seatD &
+	sleep 1
 	export DISPLAY=${displayXorgs[$nWindow]}
 	createWindow
 
 	export DISPLAY=$FAKE_DISPLAY
-done
+done < <(xrandr | grep connect | cut -d " " -f1)
 
-sleep 1 # making sure that Xorg is up
+execX :$(($nWindow+10))
 
-execX :10
+sleep 1
 
 createWindow
 
