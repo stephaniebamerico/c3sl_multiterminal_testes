@@ -1,6 +1,5 @@
 #!/bin/bash
 
-set -x
 #source ./multiseat-controller.sh
 
 export PATH=$PATH:$(pwd)
@@ -9,10 +8,14 @@ WRITE_ME=writeWindow
 READ_DEVICES=read-devices
 
 fKeyboard () {
+	echo "call" &>> /tmp/log
 	fKey=$1
 	wNum=$(($fKey-1))
 	SEAT_NAME=$2
 
+	echo "F$fKey - id $wNum - $SEAT_NAME"
+
+	set -x
 	CREATED=0
 	while (( ! CREATED )); do
 		KEYBOARDS=$(discover-devices kevdev | cut -f2)
@@ -25,6 +28,7 @@ fKeyboard () {
 
 		# See if someone presses the key:
 		PRESSED=$($READ_DEVICES $fKey $KEYBOARDS | grep '^detect' | cut -d'|' -f2)
+		echo "PRESSED=$PRESSED"
 
 		if [ -z "$PRESSED" ]; then # if $READ_DEVICES gets killed the script won't do bad stuff
 		    continue
@@ -46,12 +50,13 @@ fKeyboard () {
 		loginctl attach $SEAT_NAME $SYS_DEV
 
 		fMouse $fKey $SEAT_NAME
-		#exit 1
+		exit 1
 	else
 		echo "CAN NOT FIND KEYBOARD"
 
 		exit 0
 	fi
+	#set +x
 }
 
 fMouse () {

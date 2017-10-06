@@ -18,14 +18,15 @@
 set -x
 
 export PATH=$PATH:$(pwd)
-source ./find-devices.sh
+
+source find-devices.sh
 
 echo "Multiseat C3SL"
 MC3SL_SCRIPTS=$(pwd) #/usr/sbin/
 MC3SL_DEVICES=$(pwd) #/etc/mc3sl/devices/
 
 DISCOVER_DEVICES=$MC3SL_SCRIPTS/discover-devices
-FIND_KEYBOARD=fKeyboard
+FIND_KEYBOARD='fKeyboard'
 
 nWindow=0
 declare -a pidWindows
@@ -33,7 +34,7 @@ declare -a idWindows
 declare -a pidXorgs
 declare -a displayXorgs
 declare -a pidFindDevices
-declare -a returnValue
+declare -a seatNames
 
 execX () {
 	displayXorgs[$nWindow]=$1
@@ -76,39 +77,19 @@ writeWindow() {
 	export DISPLAY=${displayXorgs[$2]}
 	case $1 in
 	ok) 
-		write-message ${idWindows[$2]} "Seat ready, wait for the other seats" ;;
+		write-message ${idWindows[$2]} "Monitor configurado, aguarde o restante ficar pronto" ;;
 	wait_load) 
-		write-message ${idWindows[$2]} "Wait" ;;
+		write-message ${idWindows[$2]} "Aguarde" ;;
 	press_key) 
-		write-message ${idWindows[$2]} "Press F$(($2+1)) key" ;;
+		write-message ${idWindows[$2]} "Pressione a tecla F$(($2+1))" ;;
 	press_mouse) 
-		write-message ${idWindows[$2]} "Press the left mouse button" ;;
-    esac
-}
-
-getSeat() {
-	# find out which seat belongs
-	case $1 in
-	:10) 
-		SEAT_NAME=seat0 ;;
-	:11) 
-		if [[ $(loginctl list-seats | grep seat-V0 | wc -l) -eq 1 ]]; then
-			SEAT_NAME=seat-V0
-		else echo "CAN NOT FIND SEAT"
-		fi ;;
-	:12) 
-		if [[ $(loginctl list-seats | grep seat-L0 | wc -l) -eq 1 ]]; then
-			SEAT_NAME=seat-L0
-		else echo "CAN NOT FIND SEAT"
-		fi ;;
+		write-message ${idWindows[$2]} "Pressione o botão esquerdo do mouse" ;;
     esac
 }
 
 find_device () {
-	for window in `seq 0 $(($nWindow-1))`;
-	do
-		getSeat ${displayXorgs[$window]}
-		$FIND_KEYBOARD $(($window+1)) $SEAT_NAME &
+	for window in `seq 0 $(($nWindow-1))`; do
+		$FIND_KEYBOARD $(($window+1)) ${seatNames[$window]} &
 		pidFindDevices[$window]=$!
 
 		writeWindow press_key $window
@@ -116,11 +97,13 @@ find_device () {
 }
 
 systemctl stop lightdm
+loginctl flush-devices
 
 ### TO-DO: o melhor jeito é garantir que o xorg-daemon.service rode antes
 
-Xorg :90 -seat __fake-seat-1__ &
-#pidXorgs[$nWindow]=$! #nao criar janela, entao nao incrementar nWindow e vai dar errado...
+#Xorg :90 -seat __fake-seat-1__ &
+Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &
+pidFakeX=$! #nao criar janela, entao nao incrementar nWindow e vai dar errado...
 sleep 1
 ### TO-DO end
 
@@ -128,21 +111,23 @@ FAKE_DISPLAY=:$(ps aux | grep Xorg | cut -d ":" -f4 | cut -d " " -f1)
 export DISPLAY=$FAKE_DISPLAY
 
 while read -r outputD ; do
-	echo "##### $outputD"
 	displayXorgs[$nWindow]=:$(($nWindow+10))
-	echo "### display: ${displayXorgs[$nWindow]}"
-	seatD=seat-${outputD:0:1}0
-	echo "### display: $seatD"	
 
-	Xephyr -output $outputD ${displayXorgs[$nWindow]} -seat $seatD &
+	Xephyr -output $outputD ${displayXorgs[$nWindow]} &
+	
+	pidXorgs[$nWindow]=$! 
 	sleep 1
 	export DISPLAY=${displayXorgs[$nWindow]}
 	createWindow
 
 	export DISPLAY=$FAKE_DISPLAY
+	echo "loop $outputD"
 done < <(xrandr | grep connect | cut -d " " -f1)
 
+find_device
+
 execX :$(($nWindow+10))
+seatNames[$nWindow]=seat0
 
 sleep 1
 
@@ -150,15 +135,16 @@ createWindow
 
 find_device
 
-for device in `seq 0 $(($nWindow-1))`;
-do
+for device in `seq 0 $(($nWindow-1))`; do
     wait ${pidFindDevices[$device]}
 done
 
-# kills all processes that will no longer be used
+ kills all processes that will no longer be used
 
-for i in `seq 0 $(($nWindow-1))`;
-do
+#read a
+
+kill -9 $pidFakeX
+for i in `seq 0 $(($nWindow-1))`; do
 	if [[ -n "$(ps aux | grep ${pidXorgs[$i]})" ]]; then
 		kill -9 ${pidXorgs[$i]}
 	fi
@@ -174,7 +160,13 @@ do
 	if [[ -n "$(ls | grep lock)" ]]; then
 		rm lock*
 	fi
+
+	if [[ -n "$(ls | grep log)" ]]; then
+		rm log*
+	fi
 done
+
+sleep 1
 
 systemctl start lightdm
 
