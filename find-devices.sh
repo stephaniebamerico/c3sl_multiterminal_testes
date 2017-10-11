@@ -1,21 +1,15 @@
 #!/bin/bash
 
-#source ./multiseat-controller.sh
-
-export PATH=$PATH:$(pwd)
-
-WRITE_ME=writeWindow
+## Script/function constants
 READ_DEVICES=read-devices
 
-fKeyboard () {
-	echo "call" &>> /tmp/log
+find_keyboard () {
 	fKey=$1
 	wNum=$(($fKey-1))
 	SEAT_NAME=$2
 
-	echo "F$fKey - id $wNum - $SEAT_NAME"
+	echo "Starting configuration: F$fKey : $SEAT_NAME"
 
-	set -x
 	CREATED=0
 	while (( ! CREATED )); do
 		KEYBOARDS=$(discover-devices kevdev | cut -f2)
@@ -49,17 +43,16 @@ fKeyboard () {
 
 		loginctl attach $SEAT_NAME $SYS_DEV
 
-		fMouse $fKey $SEAT_NAME
+		find_mouse $fKey $SEAT_NAME
 		exit 1
 	else
 		echo "CAN NOT FIND KEYBOARD"
 
 		exit 0
 	fi
-	#set +x
 }
 
-fMouse () {
+find_mouse () {
 	fKey=$1
 	SEAT_NAME=$2
 
@@ -132,6 +125,6 @@ fMouse () {
 		exit 1
 	else
 		$WRITE_ME press_key $wNum
-		fKeyboard $fKey $SEAT_NAME
+		find_keyboard $fKey $SEAT_NAME
 	fi
 }

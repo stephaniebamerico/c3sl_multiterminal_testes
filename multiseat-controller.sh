@@ -1,12 +1,37 @@
 #!/bin/bash
 
+# Copyright (C) 2017 Centro de Computacao Cientifica e Software Livre
+# Departamento de Informatica - Universidade Federal do Parana - C3SL/UFPR
+#
+# This file is part of le-multiterminal
+#
+# le-multiterminal is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,
+# USA.
+
+#### Name: multiseat-controller.sh
+#### Description: Prepares the environment and launches the seat configuration scripts.
+#### Xorg that communicates with the Thinnetworks card should already be running.
+#### Written by: Stephanie Briere Americo - sba16@c3sl.inf.ufpr.br on 2017.
+
 ####################################################################
 #                                                                  #
 # ** IMPORTANT **                                                  #
 #                                                                  #
 # discover-devices uses the "hal" tools to detect input devices.   #
 #                                                                  #
-# These tools are obsolete, udev is the first alternative indicated #
+# These tools are obsolete, udev is the first alternative indicated#
 #    by community.                                                 #
 #                                                                  #
 # Hal was installed using                                          #
@@ -17,157 +42,155 @@
 
 set -x
 
-export PATH=$PATH:$(pwd)
+echo "Starting Multiseat C3SL" &>> log_multiterminal
 
+export PATH=$PATH:$(pwd) #TODO
+
+## Auxiliary scripts
 source find-devices.sh
+source window-acess.sh
 
-echo "Multiseat C3SL"
-MC3SL_SCRIPTS=$(pwd) #/usr/sbin/
-MC3SL_DEVICES=$(pwd) #/etc/mc3sl/devices/
+## Path constants
+MC3SL_SCRIPTS=$(pwd) #/usr/sbin/ #TODO: arrumar caminho
+MC3SL_DEVICES=$(pwd) #/etc/mc3sl/devices/ #TODO: arrumar caminho
+MC3SL_LOGS=$(pwd) #/etc/mc3sl/logs/ #TODO: arrumar caminho
 
-DISCOVER_DEVICES=$MC3SL_SCRIPTS/discover-devices
-FIND_KEYBOARD='fKeyboard'
+## Script/function in other file 
+DISCOVER_DEVICES="$MC3SL_SCRIPTS/discover-devices"
+FIND_KEYBOARD="find_keyboard" # "find-devices.sh"
+CREATE_WINDOW="create_window" # "window-acess.sh"
+WRITE_WINDOW="write_window" # "window-acess.sh"
 
-nWindow=0
-declare -a pidWindows
-declare -a idWindows
-declare -a pidXorgs
-declare -a displayXorgs
-declare -a pidFindDevices
-declare -a seatNames
+## Variables
+WINDOW_COUNTER=0
+declare -a PID_XORGS # saves the pid of the Xorg processes launched
+declare -a DISPLAY_XORGS # saves the display of the Xorg processes launched
+declare -a PID_WINDOWS # save the created window pids
+declare -a ID_WINDOWS # save the created window ids
+declare -a SEAT_NAMES # save the name of the seat of each window
+declare -a PID_FIND_DEVICES # saves the pid of the "find_devices.sh" processes launched
 
-execX () {
-	displayXorgs[$nWindow]=$1
+execute_Xorg () {
+	#### Description: Runs Xorg in a specific display.
+	#### Parameters: $1 - display to be used.
+	
+	## Runs Xorg on a specific display and get pid to destroy the process later
+	DISPLAY_XORGS[$WINDOW_COUNTER]=$1
 
-	# runs Xorg on a specific display and get pid to destroy the process later
-	export DISPLAY=${displayXorgs[$nWindow]}
+	export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
 
-	Xorg ${displayXorgs[$nWindow]} &
-	pidXorgs[$nWindow]=$! # get the pid to (maybe?) destroy the Xorg later
+	Xorg ${DISPLAY_XORGS[$WINDOW_COUNTER]} &>> log_Xorg &
+	PID_XORGS[$WINDOW_COUNTER]=$!
+	# TODO: verificar se Xorg está rodando
 
-	sleep 1 # making sure that Xorg is up
+	echo "Xorg $DISPLAY is running" &>> log_multiterminal
 }
 
-createWindow () {
-	# get screen resolution
-	screenResolutionX=$(xdpyinfo -display ${displayXorgs[$nWindow]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/' | cut -d'x' -f1) #/ $(($nWindow+1)) ))
-	screenResolutionY=x$(xdpyinfo -display ${displayXorgs[$nWindow]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/' | cut -d'x' -f2)
-	screenResolution=$screenResolutionX$screenResolutionY
+configure_devices () {
+	for WINDOW in `seq 0 $(($WINDOW_COUNTER-1))`; do
+		$FIND_KEYBOARD $(($WINDOW+1)) ${SEAT_NAMES[$WINDOW]} &>> log_multiterminal &
+		PID_FIND_DEVICES[$WINDOW]=$!
 
-	window_name=w$(($nWindow+1))
-
-	# create new window
-	seat-parent-window $screenResolution+0+0 $window_name &
-
-	# get the pid to destroy the window later
-	pidWindows[$nWindow]=$!
-
-	sleep 1 # making sure that window is up
-
-	# get window id
-	idWindows[$nWindow]=$(xwininfo -name $window_name | grep "Window id" | cut -d ' ' -f4)
-
-	writeWindow wait_load $nWindow
-
-	# increase number of windows
-	nWindow=$(($nWindow+1))
-}
-
-writeWindow() {
-	export DISPLAY=${displayXorgs[$2]}
-	case $1 in
-	ok) 
-		write-message ${idWindows[$2]} "Monitor configurado, aguarde o restante ficar pronto" ;;
-	wait_load) 
-		write-message ${idWindows[$2]} "Aguarde" ;;
-	press_key) 
-		write-message ${idWindows[$2]} "Pressione a tecla F$(($2+1))" ;;
-	press_mouse) 
-		write-message ${idWindows[$2]} "Pressione o botão esquerdo do mouse" ;;
-    esac
-}
-
-find_device () {
-	for window in `seq 0 $(($nWindow-1))`; do
-		$FIND_KEYBOARD $(($window+1)) ${seatNames[$window]} &
-		pidFindDevices[$window]=$!
-
-		writeWindow press_key $window
+		$WRITE_WINDOW press_key $WINDOW
 	done
 }
 
-systemctl stop lightdm
-loginctl flush-devices
+wait_process () {
+	PID_PROCESS=$1
+	TIMEOUT=6
+	while [[ $(ps aux | grep $PID_PROCESS -c) -le 1 && $TIMEOUT -gt 1 ]]; do
+		echo $PID_PROCESS >> log_temp
+		ps aux | grep $PID_PROCESS >> log_temp
+		sleep 0.5
+		TIMEOUT=$(($TIMEOUT-1))
+	done
+}
 
-### TO-DO: o melhor jeito é garantir que o xorg-daemon.service rode antes
+kill_processes () {
+	: '
+	for i in `seq 0 $(($WINDOW_COUNTER-1))`; do
+		if [[ -n "$(ps aux | grep ${PID_XORGS[$i]})" ]]; then
+			kill -9 ${PID_XORGS[$i]}
+		fi
 
-#Xorg :90 -seat __fake-seat-1__ &
-Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &
-pidFakeX=$! #nao criar janela, entao nao incrementar nWindow e vai dar errado...
-sleep 1
-### TO-DO end
+		if [[ -n "$(ps aux | grep ${PID_WINDOWS[$i]})" ]]; then
+			kill -9 ${PID_WINDOWS[$i]}
+		fi
 
-FAKE_DISPLAY=:$(ps aux | grep Xorg | cut -d ":" -f4 | cut -d " " -f1)
-export DISPLAY=$FAKE_DISPLAY
+		if [[ -n "$(ps aux | grep ${PID_FIND_DEVICES[$i]})" ]]; then
+			kill -9 ${PID_FIND_DEVICES[$i]}
+		fi
+	done
 
-while read -r outputD ; do
-	displayXorgs[$nWindow]=:$(($nWindow+10))
-
-	Xephyr -output $outputD ${displayXorgs[$nWindow]} &
+	if [[ -n "$(ps aux | grep $PID_FAKE_X)" ]]; then
+			kill -9 $PID_FAKE_X
+	fi
+	'
 	
-	pidXorgs[$nWindow]=$! 
-	sleep 1
-	export DISPLAY=${displayXorgs[$nWindow]}
-	createWindow
-
-	export DISPLAY=$FAKE_DISPLAY
-	echo "loop $outputD"
-done < <(xrandr | grep connect | cut -d " " -f1)
-
-find_device
-
-execX :$(($nWindow+10))
-seatNames[$nWindow]=seat0
-
-sleep 1
-
-createWindow
-
-find_device
-
-for device in `seq 0 $(($nWindow-1))`; do
-    wait ${pidFindDevices[$device]}
-done
-
- kills all processes that will no longer be used
-
-#read a
-
-kill -9 $pidFakeX
-for i in `seq 0 $(($nWindow-1))`; do
-	if [[ -n "$(ps aux | grep ${pidXorgs[$i]})" ]]; then
-		kill -9 ${pidXorgs[$i]}
-	fi
-
-	if [[ -n "$(ps aux | grep ${pidWindows[$i]})" ]]; then
-		kill -9 ${pidWindows[$i]}
-	fi
-
-	if [[ -n "$(ps aux | grep ${pidFindDevices[$i]})" ]]; then
-		kill -9 ${pidFindDevices[$i]}
-	fi
+	#if [[ -n "$(ls | grep log)" ]]; then
+	#	rm log*
+	#fi
 
 	if [[ -n "$(ls | grep lock)" ]]; then
 		rm lock*
 	fi
 
-	if [[ -n "$(ls | grep log)" ]]; then
-		rm log*
-	fi
-done
+	pkill -P $$
+}
+
+## Stops services that should not be running 
+systemctl stop lightdm
+## Removes all device assignments previously created with attach 
+loginctl flush-devices
+
+### TO-DO: o melhor jeito é garantir que o xorg-daemon.service rode antes
+Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &>> log_Xorg &
+PID_FAKE_X=$!
+sleep 1
+### TO-DO end
+
+## Find the display on which Xorg is running with "__fake-seat__"
+FAKE_DISPLAY=:$(ps aux | grep Xorg | cut -d ":" -f4 | cut -d " " -f1)
+export DISPLAY=$FAKE_DISPLAY
+echo "FAKE_DISPLAY=$FAKE_DISPLAY" &>> log_multiterminal
+while read -r outputD ; do
+	DISPLAY_XORGS[$WINDOW_COUNTER]=:$WINDOW_COUNTER
+
+	Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output $outputD &
+	sleep 2
+	PID_XORGS[$WINDOW_COUNTER]=$(pgrep -f 'Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output $outputD')
+	echo "chamando wait para xephyr de $outputD $(pgrep -f 'Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]}')" &>> log_temp
+	wait_process ${PID_XORGS[$WINDOW_COUNTER]}
+	echo "saindo de wait para xephyr de $outputD $(pgrep -f 'Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]}')" &>> log_temp
+
+	export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
+	$CREATE_WINDOW
+
+	export DISPLAY=$FAKE_DISPLAY
+	
+	echo "$outputD: Xephyr is up" &>> log_multiterminal
+done < <(xrandr | grep " connected " | cut -d " " -f1)
+
+execute_Xorg :$(($WINDOW_COUNTER+10))
+SEAT_NAMES[$WINDOW_COUNTER]=seat0
+echo "Onboard monitor: Xorg is up" &>> log_multiterminal
 
 sleep 1
 
-systemctl start lightdm
+$CREATE_WINDOW
+
+echo "Finalizando"
+
+exit 0
+
+configure_devices
+
+for device in `seq 0 $(($WINDOW_COUNTER-1))`; do
+    wait ${PID_FIND_DEVICES[$device]}
+done
+
+kill_processes
+
+#systemctl start lightdm
 
 exit 0
