@@ -1,0 +1,754 @@
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 10:56:42 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 10:56:49 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:00:49 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:00:55 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:02:40 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:02:43 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:07:04 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:07:07 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:07:34 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:07:37 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:08:31 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:08:35 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:09:01 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:09:04 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:12:03 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:12:06 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:13:45 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:13:48 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:16:57 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:17:00 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:18:37 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:18:41 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:19:52 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:19:56 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.90.log", Time: Wed Oct 11 11:20:17 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+(WW) SMI: More than one matching Device section for instances
+	(BusID: PCI:03:01:0) found: ThinNetworks TN-502/TN-750 Video Card
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+
+X.Org X Server 1.18.3
+Release Date: 2016-04-04
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 3.13.0-92-generic x86_64 Ubuntu
+Current Operating System: Linux LE-PSCH 4.4.0-96-generic #119-Ubuntu SMP Tue Sep 12 14:59:54 UTC 2017 x86_64
+Kernel command line: BOOT_IMAGE=/boot/vmlinuz-4.4.0-96-generic root=UUID=bae16139-495d-4543-97fb-78eccee70e9c ro quiet splash vt.handoff=7
+Build Date: 04 August 2016  08:22:27PM
+xorg-server 2:1.18.3-1ubuntu2.3+multiseat0 (For technical support please see http://www.ubuntu.com/support) 
+Current version of pixman: 0.33.6
+	Before reporting problems, check http://wiki.x.org
+	to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+	(++) from command line, (!!) notice, (II) informational,
+	(WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.11.log", Time: Wed Oct 11 11:20:21 2017
+(==) Using config directory: "/etc/X11/xorg.conf.d"
+(==) Using system config directory "/usr/share/X11/xorg.conf.d"
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+The XKEYBOARD keymap compiler (xkbcomp) reports:
+> Warning:          Type "ONE_LEVEL" has 1 levels, but <RALT> has 2 symbols
+>                   Ignoring extra symbols
+Errors from xkbcomp are not fatal to the X server
+(II) Server terminated successfully (0). Closing log file.
+error setting MTRR (base = 0xf6800000, size = 0x00780000, type = 1) Invalid argument (22)
+(II) Server terminated successfully (0). Closing log file.

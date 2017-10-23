@@ -63,9 +63,7 @@ WRITE_WINDOW="write_window" # "window-acess.sh"
 
 ## Variables
 WINDOW_COUNTER=0
-declare -a PID_XORGS # saves the pid of the Xorg processes launched
 declare -a DISPLAY_XORGS # saves the display of the Xorg processes launched
-declare -a PID_WINDOWS # save the created window pids
 declare -a ID_WINDOWS # save the created window ids
 declare -a SEAT_NAMES # save the name of the seat of each window
 declare -a PID_FIND_DEVICES # saves the pid of the "find_devices.sh" processes launched
@@ -107,26 +105,6 @@ wait_process () {
 }
 
 kill_processes () {
-	: '
-	for i in `seq 0 $(($WINDOW_COUNTER-1))`; do
-		if [[ -n "$(ps aux | grep ${PID_XORGS[$i]})" ]]; then
-			kill -9 ${PID_XORGS[$i]}
-		fi
-
-		if [[ -n "$(ps aux | grep ${PID_WINDOWS[$i]})" ]]; then
-			kill -9 ${PID_WINDOWS[$i]}
-		fi
-
-		if [[ -n "$(ps aux | grep ${PID_FIND_DEVICES[$i]})" ]]; then
-			kill -9 ${PID_FIND_DEVICES[$i]}
-		fi
-	done
-
-	if [[ -n "$(ps aux | grep $PID_FAKE_X)" ]]; then
-			kill -9 $PID_FAKE_X
-	fi
-	'
-	
 	#if [[ -n "$(ls | grep log)" ]]; then
 	#	rm log*
 	#fi
@@ -145,24 +123,20 @@ loginctl flush-devices
 
 ### TO-DO: o melhor jeito é garantir que o xorg-daemon.service rode antes
 Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &>> log_Xorg &
-PID_FAKE_X=$!
-sleep 1
 ### TO-DO end
 
 ## Find the display on which Xorg is running with "__fake-seat__"
 FAKE_DISPLAY=:$(ps aux | grep Xorg | cut -d ":" -f4 | cut -d " " -f1)
 export DISPLAY=$FAKE_DISPLAY
 echo "FAKE_DISPLAY=$FAKE_DISPLAY" &>> log_multiterminal
+
 while read -r outputD ; do
 	DISPLAY_XORGS[$WINDOW_COUNTER]=:$WINDOW_COUNTER
 
 	Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output $outputD &
+	wait_process $!
 	sleep 2
-	PID_XORGS[$WINDOW_COUNTER]=$(pgrep -f 'Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output $outputD')
-	echo "chamando wait para xephyr de $outputD $(pgrep -f 'Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]}')" &>> log_temp
-	wait_process ${PID_XORGS[$WINDOW_COUNTER]}
-	echo "saindo de wait para xephyr de $outputD $(pgrep -f 'Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]}')" &>> log_temp
-
+	
 	export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
 	$CREATE_WINDOW
 
@@ -179,7 +153,11 @@ sleep 1
 
 $CREATE_WINDOW
 
-echo "Finalizando"
+echo "FINALIZANDO..."
+
+read a
+
+kill_processes
 
 exit 0
 

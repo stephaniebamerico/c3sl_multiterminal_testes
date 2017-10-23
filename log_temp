@@ -1,0 +1,46 @@
+chamando wait para xephyr de LVDS 
+
+
+
+
+
+saindo de wait para xephyr de LVDS 
+chamando wait para xephyr de LVDS 
+
+
+
+
+
+saindo de wait para xephyr de LVDS 
+2402
+root      2411  0.0  0.0  16768  1088 pts/0    S+   11:02   0:00 grep 2402
+2402
+root      2452  0.0  0.0  16768  1016 pts/0    S+   11:02   0:00 grep 2402
+2402
+root      2495  0.0  0.0  16768   940 pts/0    S+   11:02   0:00 grep 2402
+2402
+root      2538  0.0  0.0  16768   964 pts/0    S+   11:02   0:00 grep 2402
+2402
+root      2576  0.0  0.0  16768   968 pts/0    S+   11:02   0:00 grep 2402
+2940
+root      2946  0.0  0.0  16768   968 pts/0    S+   11:07   0:00 grep 2940
+2940
+root      2987  0.0  0.0  16768   908 pts/0    S+   11:07   0:00 grep 2940
+2940
+root      3030  0.0  0.0  16768   960 pts/0    S+   11:07   0:00 grep 2940
+2940
+2940
+root      3116  0.0  0.0  16768   936 pts/0    S+   11:07   0:00 grep 2940
+3371
+root      3376  0.0  0.0  16768   924 pts/0    S+   11:07   0:00 grep 3371
+3371
+root      3415  0.0  0.0  16768   960 pts/0    S+   11:07   0:00 grep 3371
+3371
+root      3465  0.0  0.0  16768   944 pts/0    S+   11:07   0:00 grep 3371
+3371
+root      3512  0.0  0.0  16768   968 pts/0    S+   11:07   0:00 grep 3371
+3371
+root      3551  0.0  0.0  16768   928 pts/0    S+   11:07   0:00 grep 3371
+3941
+root      3941  0.0  0.0  16056  1104 pts/0    S+   11:08   0:00 seat-parent-window 1360x768+0+0 w1
+root      3952  0.0  0.0  16768   968 pts/0    S+   11:08   0:00 grep 3941

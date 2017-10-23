@@ -42,9 +42,9 @@ create_window () {
 
 	## Creates a new window and get the pid to destroy the window later
 	$NEW_WINDOW $SCREEN_RESOLUTION+0+0 $WINDOW_NAME &
-	PID_WINDOWS[$WINDOW_COUNTER]=$!
-
-	$WAIT_PROCESS ${PID_WINDOWS[$WINDOW_COUNTER]}
+	PID_WINDOW=$!
+	$WAIT_PROCESS $PID_WINDOW
+	sleep 1
 
 	## Get the window id
 	ID_WINDOWS[$WINDOW_COUNTER]=$(xwininfo -name $WINDOW_NAME | grep "Window id" | cut -d ' ' -f4)
