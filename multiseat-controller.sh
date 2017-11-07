@@ -50,10 +50,10 @@ export PATH=$PATH:$(pwd) #TODO
 source find-devices.sh
 source window-acess.sh
 
-## Path constants
-MC3SL_SCRIPTS=$(pwd) #/usr/sbin/ #TODO: arrumar caminho
-MC3SL_DEVICES=$(pwd) #/etc/mc3sl/devices/ #TODO: arrumar caminho
-MC3SL_LOGS=$(pwd) #/etc/mc3sl/logs/ #TODO: arrumar caminho
+## Path constants #TODO: arrumar caminhos
+MC3SL_SCRIPTS=$(pwd) #/usr/sbin/ 
+MC3SL_DEVICES=$(pwd) #/etc/mc3sl/devices/ 
+MC3SL_LOGS=$(pwd) #/etc/mc3sl/logs/ 
 
 ## Script/function in other file 
 DISCOVER_DEVICES="$MC3SL_SCRIPTS/discover-devices"
@@ -118,8 +118,6 @@ kill_processes () {
 
 ## Stops services that should not be running 
 systemctl stop lightdm
-## Removes all device assignments previously created with attach 
-loginctl flush-devices
 
 ### TO-DO: o melhor jeito é garantir que o xorg-daemon.service rode antes
 Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &>> log_Xorg &
@@ -130,20 +128,35 @@ FAKE_DISPLAY=:$(ps aux | grep Xorg | cut -d ":" -f4 | cut -d " " -f1)
 export DISPLAY=$FAKE_DISPLAY
 echo "FAKE_DISPLAY=$FAKE_DISPLAY" &>> log_multiterminal
 
-while read -r outputD ; do
-	DISPLAY_XORGS[$WINDOW_COUNTER]=:$WINDOW_COUNTER
+sleep 2
+while read -r cSeat; do
+	echo "$cSeat"
+	#DISPLAY_XORGS[$WINDOW_COUNTER]=:$WINDOW_COUNTER
+	#SEAT_NAMES[$WINDOW_COUNTER]=$cSeat
+	#echo "SEAT = $cSeat"
+	#if [[ "$(echo $cSeat | cut -d "-" -f2)" -eq "L*" ]]; then
+	#	echo "LVDS"
+	#else
+	#	if [[ "$($cSeat | cut -d "-" -f2)" -eq "V*" ]]; then
+	#		echo "VGA"
+	#	fi
+	#fi
 
-	Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output $outputD &
-	wait_process $!
-	sleep 2
-	
-	export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
-	$CREATE_WINDOW
+	#read a
 
-	export DISPLAY=$FAKE_DISPLAY
-	
-	echo "$outputD: Xephyr is up" &>> log_multiterminal
-done < <(xrandr | grep " connected " | cut -d " " -f1)
+	#Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output $outputD -noxv &
+	#wait_process $!
+	#echo $!
+	#sleep 2
+	#read a	
+	#export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
+	#$CREATE_WINDOW
+
+	#export DISPLAY=$FAKE_DISPLAY
+	#read a
+	#echo "$outputD: Xephyr is up" &>> log_multiterminal
+done < <(loginctl list-seats | grep "seat-")
+
 
 execute_Xorg :$(($WINDOW_COUNTER+10))
 SEAT_NAMES[$WINDOW_COUNTER]=seat0

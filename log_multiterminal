@@ -1,7 +1,6 @@
 Starting Multiseat C3SL
-FAKE_DISPLAY=:90
-LVDS: Xephyr is up
-Xorg :11 is running
+FAKE_DISPLAY=:
+Xorg :10 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
@@ -10,56 +9,154 @@ Xorg :11 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
-LVDS: Xephyr is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+90
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+: Xephyr is up
 Xorg :11 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
-LVDS: Xephyr is up
-Xorg :11 is running
+Xorg :10 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
-LVDS: Xephyr is up
-Xorg :11 is running
+Xorg :10 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
-LVDS: Xephyr is up
-Xorg :11 is running
+Xorg :10 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
-LVDS: Xephyr is up
-Xorg :11 is running
+Xorg :10 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
-LVDS: Xephyr is up
-Xorg :11 is running
+Xorg :10 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
-LVDS: Xephyr is up
-Xorg :11 is running
+Xorg :10 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
-LVDS: Xephyr is up
-Xorg :11 is running
+Xorg :10 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
-LVDS: Xephyr is up
-Xorg :11 is running
+Xorg :10 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
-LVDS: Xephyr is up
-Xorg :11 is running
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+Xorg :10 is running
 Onboard monitor: Xorg is up
 Starting Multiseat C3SL
 FAKE_DISPLAY=:90
-LVDS: Xephyr is up
-Xorg :11 is running
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+90
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+90
+Xorg :10 is running
+Onboard monitor: Xorg is up
++ fKey=1
++ wNum=0
++ SEAT_NAME=seat0
++ echo 'Starting configuration: F1 : seat0'
+Starting configuration: F1 : seat0
++ CREATED=0
++ ((  ! CREATED  ))
+++ discover-devices kevdev
+++ cut -f2
+/home/teste/multiterminal-testes/discover-devices: line 33: hal-find-by-capability: command not found
+/home/teste/multiterminal-testes/discover-devices: line 34: hal-find-by-capability: command not found
++ KEYBOARDS=
++ '[' -z '' ']'
++ echo 'No keyboards'
+No keyboards
++ sleep 1
++ continue
++ ((  ! CREATED  ))
+++ discover-devices kevdev
+++ cut -f2
+/home/teste/multiterminal-testes/discover-devices: line 33: hal-find-by-capability: command not found
+/home/teste/multiterminal-testes/discover-devices: line 34: hal-find-by-capability: command not found
++ KEYBOARDS=
++ '[' -z '' ']'
++ echo 'No keyboards'
+No keyboards
++ sleep 1
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+10
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+Xorg :10 is running
+Onboard monitor: Xorg is up
+Starting Multiseat C3SL
+FAKE_DISPLAY=:90
+90
+Xorg :10 is running
 Onboard monitor: Xorg is up

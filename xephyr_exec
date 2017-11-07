@@ -1,0 +1,1 @@
+Xephyr -dpi 96 -xkb-rules evdev -xkb-layout br -xkb-model abnt2 -noxv -output VGA :0 -seat seat-V0 -auth /var/run/lightdm/root/:0 -nolisten tcp
