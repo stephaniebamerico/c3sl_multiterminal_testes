@@ -61,8 +61,11 @@ FIND_KEYBOARD="find_keyboard" # "find-devices.sh"
 CREATE_WINDOW="create_window" # "window-acess.sh"
 WRITE_WINDOW="write_window" # "window-acess.sh"
 
-## Variables
+## Variables and macros
 WINDOW_COUNTER=0
+N_SEATS_LISTED=0
+ONBOARD=0
+OUTPUTS=("LVDS" "VGA") # output options
 declare -a DISPLAY_XORGS # saves the display of the Xorg processes launched
 declare -a ID_WINDOWS # save the created window ids
 declare -a SEAT_NAMES # save the name of the seat of each window
@@ -86,8 +89,9 @@ execute_Xorg () {
 
 configure_devices () {
 	for WINDOW in `seq 0 $(($WINDOW_COUNTER-1))`; do
-		$FIND_KEYBOARD $(($WINDOW+1)) ${SEAT_NAMES[$WINDOW]} &>> log_multiterminal &
+		$FIND_KEYBOARD $(($WINDOW+1)) $ONBOARD &
 		PID_FIND_DEVICES[$WINDOW]=$!
+		echo "$!" &>> log_multiterminal
 
 		$WRITE_WINDOW press_key $WINDOW
 	done
@@ -105,9 +109,9 @@ wait_process () {
 }
 
 kill_processes () {
-	#if [[ -n "$(ls | grep log)" ]]; then
-	#	rm log*
-	#fi
+	if [[ -n "$(ls | grep log)" ]]; then
+		rm log*
+	fi
 
 	if [[ -n "$(ls | grep lock)" ]]; then
 		rm lock*
@@ -116,10 +120,9 @@ kill_processes () {
 	pkill -P $$
 }
 
-## Stops services that should not be running 
+### TODO: Serviços que precisam rodar ANTES desse script 
 systemctl stop lightdm
-
-### TO-DO: o melhor jeito é garantir que o xorg-daemon.service rode antes
+# loginctl flush-devices
 Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &>> log_Xorg &
 ### TO-DO end
 
@@ -128,56 +131,37 @@ FAKE_DISPLAY=:$(ps aux | grep Xorg | cut -d ":" -f4 | cut -d " " -f1)
 export DISPLAY=$FAKE_DISPLAY
 echo "FAKE_DISPLAY=$FAKE_DISPLAY" &>> log_multiterminal
 
-sleep 2
-while read -r cSeat; do
-	echo "$cSeat"
-	#DISPLAY_XORGS[$WINDOW_COUNTER]=:$WINDOW_COUNTER
-	#SEAT_NAMES[$WINDOW_COUNTER]=$cSeat
-	#echo "SEAT = $cSeat"
-	#if [[ "$(echo $cSeat | cut -d "-" -f2)" -eq "L*" ]]; then
-	#	echo "LVDS"
-	#else
-	#	if [[ "$($cSeat | cut -d "-" -f2)" -eq "V*" ]]; then
-	#		echo "VGA"
-	#	fi
-	#fi
+for i in `seq 0 1`; do
+	DISPLAY_XORGS[$WINDOW_COUNTER]=:$((WINDOW_COUNTER+10))
 
-	#read a
+	Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output ${OUTPUTS[$WINDOW_COUNTER]} -noxv &
+	sleep 2
 
-	#Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output $outputD -noxv &
-	#wait_process $!
-	#echo $!
-	#sleep 2
-	#read a	
-	#export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
-	#$CREATE_WINDOW
+	export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
+	$CREATE_WINDOW
+	export DISPLAY=$FAKE_DISPLAY
+done
 
-	#export DISPLAY=$FAKE_DISPLAY
-	#read a
-	#echo "$outputD: Xephyr is up" &>> log_multiterminal
-done < <(loginctl list-seats | grep "seat-")
+if [ "$(cat "/sys$(udevadm info /sys/class/drm/card0 | grep "P:" | cut -d " " -f2)/card0-VGA-1/status")" == "connected" ]; then
+	execute_Xorg :$(($WINDOW_COUNTER+10))
+	sleep 1
 
-
-execute_Xorg :$(($WINDOW_COUNTER+10))
-SEAT_NAMES[$WINDOW_COUNTER]=seat0
-echo "Onboard monitor: Xorg is up" &>> log_multiterminal
-
-sleep 1
-
-$CREATE_WINDOW
-
-echo "FINALIZANDO..."
-
-read a
-
-kill_processes
-
-exit 0
+	$CREATE_WINDOW
+	ONBOARD=1
+fi
 
 configure_devices
 
-for device in `seq 0 $(($WINDOW_COUNTER-1))`; do
-    wait ${PID_FIND_DEVICES[$device]}
+#read a
+#kill_processes
+#exit 0
+
+# por que wait -n retorna sem terminar nenhum processo na primeira vez?
+N_SEATS_LISTED=$(($(loginctl list-seats | grep -c "seat-")+$ONBOARD))
+CONFIGURED_SEATS=0
+while [[ $CONFIGURED_SEATS -le $N_SEATS_LISTED ]]; do
+    wait -n $PID_FIND_DEVICES
+    CONFIGURED_SEATS=$(($CONFIGURED_SEATS+1))
 done
 
 kill_processes

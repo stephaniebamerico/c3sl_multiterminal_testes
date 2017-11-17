@@ -42,8 +42,8 @@ create_window () {
 
 	## Creates a new window and get the pid to destroy the window later
 	$NEW_WINDOW $SCREEN_RESOLUTION+0+0 $WINDOW_NAME &
-	PID_WINDOW=$!
-	$WAIT_PROCESS $PID_WINDOW
+	#PID_WINDOW=$!
+	#$WAIT_PROCESS $PID_WINDOW
 	sleep 1
 
 	## Get the window id

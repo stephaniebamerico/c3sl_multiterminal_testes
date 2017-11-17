@@ -2,11 +2,21 @@
 
 ## Script/function constants
 READ_DEVICES=read-devices
+WRITE_W=write_window
+declare -a SEATS_LISTED # save the name of the existing seats
+
 
 find_keyboard () {
 	fKey=$1
 	wNum=$(($fKey-1))
-	SEAT_NAME=$2
+	ONBOARD=$2
+
+	## Discovers secondary seats (equivalent to how many monitors are connected)
+	while read cSeat; do
+		SEATS_LISTED[$N_SEATS_LISTED]=$cSeat
+		N_SEATS_LISTED=$(($N_SEATS_LISTED+1))
+	done < <(loginctl list-seats | grep "seat-")
+	SEATS_LISTED[$N_SEATS_LISTED]="seat0"
 
 	echo "Starting configuration: F$fKey : $SEAT_NAME"
 
@@ -38,8 +48,11 @@ find_keyboard () {
 	done
 
 	if [ -n "$SYS_DEV" ]; then 
-		# show the keyboard
-		echo -n "Keyboard:" $SYS_DEV
+		# Now we know the seat/output
+		echo "wnum: $wNum = ${SEATS_LISTED[$wNum]}"
+		SEAT_NAME=${SEATS_LISTED[$wNum]}
+
+		echo "Keyboard: $SYS_DEV"
 
 		loginctl attach $SEAT_NAME $SYS_DEV
 
@@ -58,6 +71,9 @@ find_mouse () {
 
 	CREATED=0
 	TIMEOUT=0
+
+	echo "INICIANDO MOUSE"
+
     while (( ! CREATED && ! TIMEOUT )); do
 		MICE=$($DISCOVER_DEVICES mevdev | cut -f2)
 
@@ -69,7 +85,7 @@ find_mouse () {
 
 		# Create the lock
 		LOCK_EXISTS=1
-		$WRITE_ME wait_load $wNum
+		$WRITE_W wait_load $wNum
 		while (( LOCK_EXISTS )); do
 		    # creates lock to prevent someone from creating while checking
 		    touch ${MC3SL_DEVICES}/lock${fKey}
@@ -90,7 +106,7 @@ find_mouse () {
 		done
 
 		# Now we have the lock!
-		$WRITE_ME press_mouse $wNum
+		$WRITE_W press_mouse $wNum
 
 		# See if someone presses the button:
 		PRESSED=$($READ_DEVICES 13 $MICE | grep '^detect' | cut -d'|' -f2)
@@ -115,16 +131,15 @@ find_mouse () {
     done
 
     if [[ "$CREATED" -eq 1 && -n "$SYS_DEV" ]]; then 
-		# show the mouse
 		echo -n "Mouse:" $SYS_DEV
 
 		loginctl attach $SEAT_NAME $SYS_DEV
 
-		$WRITE_ME ok $wNum
+		$WRITE_W ok $wNum
 
 		exit 1
 	else
-		$WRITE_ME press_key $wNum
+		$WRITE_W press_key $wNum
 		find_keyboard $fKey $SEAT_NAME
 	fi
 }
