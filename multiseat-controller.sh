@@ -52,7 +52,7 @@ source window-acess.sh
 
 ## Path constants #TODO: arrumar caminhos
 MC3SL_SCRIPTS=$(pwd) #/usr/sbin/ 
-MC3SL_DEVICES=$(pwd) #/etc/mc3sl/devices/ 
+MC3SL_DEVICES=$(pwd)/devices #/etc/mc3sl/devices/ 
 MC3SL_LOGS=$(pwd) #/etc/mc3sl/logs/ 
 
 ## Script/function in other file 
@@ -117,6 +117,10 @@ kill_processes () {
 		rm lock*
 	fi
 
+	if [[ -n "$(ls $MC3SL_DEVICES | grep lock)" ]]; then
+		rm -f $MC3SL_DEVICES/*
+	fi
+
 	pkill -P $$
 }
 
@@ -126,8 +130,8 @@ systemctl stop lightdm
 Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &>> log_Xorg &
 ### TO-DO end
 
-## Find the display on which Xorg is running with "__fake-seat__"
-FAKE_DISPLAY=:$(ps aux | grep Xorg | cut -d ":" -f4 | cut -d " " -f1)
+## TO-DO: Find the display on which Xorg is running with "__fake-seat__"
+FAKE_DISPLAY=:90
 export DISPLAY=$FAKE_DISPLAY
 echo "FAKE_DISPLAY=$FAKE_DISPLAY" &>> log_multiterminal
 

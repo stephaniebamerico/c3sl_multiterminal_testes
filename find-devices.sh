@@ -3,6 +3,7 @@
 ## Script/function constants
 READ_DEVICES=read-devices
 WRITE_W=write_window
+DEVICES=devices
 declare -a SEATS_LISTED # save the name of the existing seats
 
 
@@ -17,6 +18,8 @@ find_keyboard () {
 		N_SEATS_LISTED=$(($N_SEATS_LISTED+1))
 	done < <(loginctl list-seats | grep "seat-")
 	SEATS_LISTED[$N_SEATS_LISTED]="seat0"
+
+	SEAT_NAME=${SEATS_LISTED[$wNum]}
 
 	echo "Starting configuration: F$fKey : $SEAT_NAME"
 
@@ -45,6 +48,19 @@ find_keyboard () {
 		SYS_DEV=/sys$(udevadm info $PRESSED | grep 'P:' | cut -d ' ' -f2- | sed -r 's/event.*$//g')
 
 		CREATED=1
+
+		ln -sf $SYS_DEV $DEVICES/keyboard_$SEAT_NAME
+
+		for i in `ls $DEVICES | grep "\<keyboard"`; do
+		    if [ "$i" != "keyboard_$SEAT_NAME" ]; then
+			AUX=$(stat -c %N $DEVICES/$i | cut -d ' ' -f3 | cut -d "'" -f2)
+			if [ "$AUX" = "$SYS_DEV" ]; then
+			    # Keyboard link already exists...
+			    rm -f $DEVICES/keyboard_$SEAT_NAME
+			    CREATED=0
+			fi
+		    fi
+		done
 	done
 
 	if [ -n "$SYS_DEV" ]; then 
@@ -127,8 +143,22 @@ find_mouse () {
 
 		CREATED=1
 
-		rm -f ${MC3SL_DEVICES}/lock${fKey}
+		ln -sf $SYS_DEV $DEVICES/mouse_$SEAT_NAME
+
+		for i in `ls $DEVICES | grep "\<mouse"`; do
+		    if [ "$i" != "mouse_$SEAT_NAME" ]; then
+			AUX=$(stat -c %N $DEVICES/$i | cut -d ' ' -f3 | cut -d "'" -f2)
+			if [ "$AUX" = "$SYS_DEV" ]; then
+			    # Mouse link already exists...
+			    rm -f $DEVICES/mouse_$SEAT_NAME
+			    CREATED=0
+			fi
+		    fi
+		done
+
+		#rm -f ${MC3SL_DEVICES}/lock${fKey}
     done
+    rm -f ${MC3SL_DEVICES}/lock${fKey}
 
     if [[ "$CREATED" -eq 1 && -n "$SYS_DEV" ]]; then 
 		echo -n "Mouse:" $SYS_DEV
@@ -140,6 +170,7 @@ find_mouse () {
 		exit 1
 	else
 		$WRITE_W press_key $wNum
+		rm -f $DEVICES/keyboard_$SEAT_NAME
 		find_keyboard $fKey $SEAT_NAME
 	fi
 }
