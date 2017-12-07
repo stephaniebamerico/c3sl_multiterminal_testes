@@ -23,7 +23,7 @@
 #### Name: multiseat-controller.sh
 #### Description: Prepares the environment and launches the seat configuration scripts.
 #### Xorg that communicates with the Thinnetworks card should already be running.
-#### Written by: Stephanie Briere Americo - sba16@c3sl.inf.ufpr.br on 2017.
+#### Written by: Stephanie Briere Americo - sba16@c3sl.ufpr.br on 2017.
 
 ####################################################################
 #                                                                  #
@@ -52,7 +52,7 @@ source window-acess.sh
 
 ## Path constants #TODO: arrumar caminhos
 MC3SL_SCRIPTS=$(pwd) #/usr/sbin/ 
-MC3SL_DEVICES=$(pwd)/devices #/etc/mc3sl/devices/ 
+MC3SL_DEVICES=devices #/etc/mc3sl/devices/ 
 MC3SL_LOGS=$(pwd) #/etc/mc3sl/logs/ 
 
 ## Script/function in other file 
@@ -66,6 +66,7 @@ WINDOW_COUNTER=0
 N_SEATS_LISTED=0
 ONBOARD=0
 OUTPUTS=("LVDS" "VGA") # output options
+
 declare -a DISPLAY_XORGS # saves the display of the Xorg processes launched
 declare -a ID_WINDOWS # save the created window ids
 declare -a SEAT_NAMES # save the name of the seat of each window
@@ -109,15 +110,15 @@ wait_process () {
 }
 
 kill_processes () {
-	if [[ -n "$(ls | grep log)" ]]; then
-		rm log*
-	fi
+	#if [[ -n "$(ls | grep log)" ]]; then
+	#	rm log*
+	#fi
 
 	if [[ -n "$(ls | grep lock)" ]]; then
 		rm lock*
 	fi
 
-	if [[ -n "$(ls $MC3SL_DEVICES | grep lock)" ]]; then
+	if [[ -n "$(ls $MC3SL_DEVICES)" ]]; then
 		rm -f $MC3SL_DEVICES/*
 	fi
 
@@ -128,6 +129,7 @@ kill_processes () {
 systemctl stop lightdm
 # loginctl flush-devices
 Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &>> log_Xorg &
+sleep 2
 ### TO-DO end
 
 ## TO-DO: Find the display on which Xorg is running with "__fake-seat__"
@@ -156,9 +158,7 @@ fi
 
 configure_devices
 
-#read a
-#kill_processes
-#exit 0
+echo "$ONBOARD" >> log_onboard
 
 # por que wait -n retorna sem terminar nenhum processo na primeira vez?
 N_SEATS_LISTED=$(($(loginctl list-seats | grep -c "seat-")+$ONBOARD))

@@ -13,13 +13,14 @@ find_keyboard () {
 	ONBOARD=$2
 
 	## Discovers secondary seats (equivalent to how many monitors are connected)
-	while read cSeat; do
-		SEATS_LISTED[$N_SEATS_LISTED]=$cSeat
-		N_SEATS_LISTED=$(($N_SEATS_LISTED+1))
-	done < <(loginctl list-seats | grep "seat-")
-	SEATS_LISTED[$N_SEATS_LISTED]="seat0"
+	#N_SEATS_LISTED=0
+	#while read cSeat; do
+	#	SEATS_LISTED[$N_SEATS_LISTED]=$cSeat
+	#	N_SEATS_LISTED=$(($N_SEATS_LISTED+1))
+	#done < <(loginctl list-seats | grep "seat-")
+	#SEATS_LISTED[$N_SEATS_LISTED]="seat0"
 
-	SEAT_NAME=${SEATS_LISTED[$wNum]}
+	#SEAT_NAME=${SEATS_LISTED[$wNum]}
 
 	echo "Starting configuration: F$fKey : $SEAT_NAME"
 
@@ -27,8 +28,12 @@ find_keyboard () {
 	while (( ! CREATED )); do
 		KEYBOARDS=$(discover-devices kevdev | cut -f2)
 
+		for i in `ls $MDM_DEVICES | grep "\<keyboard"`; do
+			KEYBOARDS=$(sed "s#$i##g" <<< $KEYBOARDS)
+		done
+
 		if [ -z "$KEYBOARDS" ]; then
-		    echo "No keyboards"
+		    echo "No keyboards connected"
 		    sleep 1
 		    continue
 		fi
@@ -45,16 +50,14 @@ find_keyboard () {
 		    continue
 		fi
 
-		SYS_DEV=/sys$(udevadm info $PRESSED | grep 'P:' | cut -d ' ' -f2- | sed -r 's/event.*$//g')
-
 		CREATED=1
 
-		ln -sf $SYS_DEV $DEVICES/keyboard_$SEAT_NAME
+		ln -sf $PRESSED $DEVICES/keyboard_$SEAT_NAME
 
 		for i in `ls $DEVICES | grep "\<keyboard"`; do
 		    if [ "$i" != "keyboard_$SEAT_NAME" ]; then
-			AUX=$(stat -c %N $DEVICES/$i | cut -d ' ' -f3 | cut -d "'" -f2)
-			if [ "$AUX" = "$SYS_DEV" ]; then
+			AUX=$(stat -c %N $DEVICES/$i | cut -d '>' -f2 | cut -d "'" -f2)
+			if [ "$AUX" = "$PRESSED" ]; then
 			    # Keyboard link already exists...
 			    rm -f $DEVICES/keyboard_$SEAT_NAME
 			    CREATED=0
@@ -63,12 +66,13 @@ find_keyboard () {
 		done
 	done
 
+	SYS_DEV=/sys$(udevadm info $PRESSED | grep 'P:' | cut -d ' ' -f2- | sed -r 's/event.*$//g')
+
 	if [ -n "$SYS_DEV" ]; then 
 		# Now we know the seat/output
-		echo "wnum: $wNum = ${SEATS_LISTED[$wNum]}"
 		SEAT_NAME=${SEATS_LISTED[$wNum]}
 
-		echo "Keyboard: $SYS_DEV"
+		echo -ne "\n#Keyboard: $SYS_DEV $SEAT_NAME" >> log_teste
 
 		loginctl attach $SEAT_NAME $SYS_DEV
 
@@ -93,8 +97,12 @@ find_mouse () {
     while (( ! CREATED && ! TIMEOUT )); do
 		MICE=$($DISCOVER_DEVICES mevdev | cut -f2)
 
+		for i in `ls $MDM_DEVICES | grep "\<mouse"`; do
+			MICE=$(sed "s#$i##g" <<< $MICE)
+		done
+
 		if [ -z "$MICE" ]; then
-		    echo "No mice"
+		    echo "No mice connected"
 		    sleep 1
 		    continue
 		fi
@@ -139,16 +147,14 @@ find_mouse () {
 		    continue
 		fi
 
-		SYS_DEV=/sys$(udevadm info $PRESSED | grep 'P:' | cut -d ' ' -f2- | sed -r 's/event.*$//g')
-
 		CREATED=1
 
-		ln -sf $SYS_DEV $DEVICES/mouse_$SEAT_NAME
+		ln -sf $PRESSED $DEVICES/mouse_$SEAT_NAME
 
 		for i in `ls $DEVICES | grep "\<mouse"`; do
 		    if [ "$i" != "mouse_$SEAT_NAME" ]; then
-			AUX=$(stat -c %N $DEVICES/$i | cut -d ' ' -f3 | cut -d "'" -f2)
-			if [ "$AUX" = "$SYS_DEV" ]; then
+			AUX=$(stat -c %N $DEVICES/$i | cut -d '>' -f2 | cut -d "'" -f2)
+			if [ "$AUX" = "$PRESSED" ]; then
 			    # Mouse link already exists...
 			    rm -f $DEVICES/mouse_$SEAT_NAME
 			    CREATED=0
@@ -156,12 +162,13 @@ find_mouse () {
 		    fi
 		done
 
-		#rm -f ${MC3SL_DEVICES}/lock${fKey}
+		rm -f ${MC3SL_DEVICES}/lock${fKey}
     done
-    rm -f ${MC3SL_DEVICES}/lock${fKey}
+
+    SYS_DEV=/sys$(udevadm info $PRESSED | grep 'P:' | cut -d ' ' -f2- | sed -r 's/event.*$//g')
 
     if [[ "$CREATED" -eq 1 && -n "$SYS_DEV" ]]; then 
-		echo -n "Mouse:" $SYS_DEV
+		echo -ne "\n#Mouse: $SYS_DEV $SEAT_NAME" >> log_teste
 
 		loginctl attach $SEAT_NAME $SYS_DEV
 
