@@ -25,95 +25,49 @@
 #### Xorg that communicates with the Thinnetworks card should already be running.
 #### Written by: Stephanie Briere Americo - sba16@c3sl.ufpr.br on 2017.
 
-####################################################################
-#                                                                  #
-# ** IMPORTANT **                                                  #
-#                                                                  #
-# discover-devices uses the "hal" tools to detect input devices.   #
-#                                                                  #
-# These tools are obsolete, udev is the first alternative indicated#
-#    by community.                                                 #
-#                                                                  #
-# Hal was installed using                                          #
-#  add-apt-repository ppa:mjblenner/ppa-hal                        #
-#  apt-get update && apt-get install hal                           #
-#                                                                  #
-####################################################################
-
 set -x
 
-echo "Starting Multiseat C3SL" &>> log_multiterminal
+#TODO: arrumar caminhos
 
-export PATH=$PATH:$(pwd) #TODO
+export PATH=$PATH:$(pwd)
 
 ## Auxiliary scripts
 source find-devices.sh
 source window-acess.sh
 
-## Path constants #TODO: arrumar caminhos
+## Path constants
 MC3SL_SCRIPTS=$(pwd) #/usr/sbin/ 
 MC3SL_DEVICES=devices #/etc/mc3sl/devices/ 
 MC3SL_LOGS=$(pwd) #/etc/mc3sl/logs/ 
 
 ## Script/function in other file 
 DISCOVER_DEVICES="$MC3SL_SCRIPTS/discover-devices"
-FIND_KEYBOARD="find_keyboard" # "find-devices.sh"
-CREATE_WINDOW="create_window" # "window-acess.sh"
-WRITE_WINDOW="write_window" # "window-acess.sh"
+FIND_KEYBOARD="$MC3SL_SCRIPTS/find_keyboard" # "find-devices.sh"
+CREATE_WINDOW="$MC3SL_SCRIPTS/create_window" # "window-acess.sh"
+WRITE_WINDOW="$MC3SL_SCRIPTS/write_window" # "window-acess.sh"
 
-## Variables and macros
-WINDOW_COUNTER=0
-N_SEATS_LISTED=0
-ONBOARD=0
+## Macros
+FAKE_DISPLAY=:90 # display to access fake-seat (secondary card)
 OUTPUTS=("LVDS" "VGA") # output options
 
+## Variables 
+WINDOW_COUNTER=0 # how many windows were created
+N_SEATS_LISTED=0 # how many seats are there in the system
+ONBOARD=0 # if the onboard is connected
 declare -a DISPLAY_XORGS # saves the display of the Xorg processes launched
-declare -a ID_WINDOWS # save the created window ids
-declare -a SEAT_NAMES # save the name of the seat of each window
-declare -a PID_FIND_DEVICES # saves the pid of the "find_devices.sh" processes launched
-
-execute_Xorg () {
-	#### Description: Runs Xorg in a specific display.
-	#### Parameters: $1 - display to be used.
-	
-	## Runs Xorg on a specific display and get pid to destroy the process later
-	DISPLAY_XORGS[$WINDOW_COUNTER]=$1
-
-	export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
-
-	Xorg ${DISPLAY_XORGS[$WINDOW_COUNTER]} &>> log_Xorg &
-	PID_XORGS[$WINDOW_COUNTER]=$!
-	# TODO: verificar se Xorg está rodando
-
-	echo "Xorg $DISPLAY is running" &>> log_multiterminal
-}
+declare -a ID_WINDOWS # save the created window ids (used in window-acess.sh)
 
 configure_devices () {
+	# Run configuration script for each seat
 	for WINDOW in `seq 0 $(($WINDOW_COUNTER-1))`; do
 		$FIND_KEYBOARD $(($WINDOW+1)) $ONBOARD &
-		PID_FIND_DEVICES[$WINDOW]=$!
-		echo "$!" &>> log_multiterminal
 
 		$WRITE_WINDOW press_key $WINDOW
 	done
 }
 
-wait_process () {
-	PID_PROCESS=$1
-	TIMEOUT=6
-	while [[ $(ps aux | grep $PID_PROCESS -c) -le 1 && $TIMEOUT -gt 1 ]]; do
-		echo $PID_PROCESS >> log_temp
-		ps aux | grep $PID_PROCESS >> log_temp
-		sleep 0.5
-		TIMEOUT=$(($TIMEOUT-1))
-	done
-}
-
 kill_processes () {
-	#if [[ -n "$(ls | grep log)" ]]; then
-	#	rm log*
-	#fi
-
+	# Cleans the system by killing all the processes it has created
 	if [[ -n "$(ls | grep lock)" ]]; then
 		rm lock*
 	fi
@@ -127,40 +81,51 @@ kill_processes () {
 
 ### TODO: Serviços que precisam rodar ANTES desse script 
 systemctl stop lightdm
-# loginctl flush-devices
-Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &>> log_Xorg &
+Xorg :90 -seat __fake-seat-1__ -dpms -s 0 -nocursor &
 sleep 2
 ### TO-DO end
 
-## TO-DO: Find the display on which Xorg is running with "__fake-seat__"
-FAKE_DISPLAY=:90
+############ BEGIN ############
+
+if [ "$(cat "/sys$(udevadm info /sys/class/drm/card0 | grep "P:" | cut -d " " -f2)/card0-VGA-1/status")" == "connected" ]; then
+	# If a monitor is connected to the onboard, it runs Xorg and creates the window for it too
+	DISPLAY_XORGS[$WINDOW_COUNTER]=:$(($WINDOW_COUNTER+10))
+	export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
+
+	Xorg ${DISPLAY_XORGS[$WINDOW_COUNTER]} &
+	sleep 1 # TODO
+
+	$CREATE_WINDOW
+	
+	ONBOARD=1
+else
+	WINDOW_COUNTER=1
+fi
+
+# The fake_seat display needs to be exported to run the Xephyr that communicate with it
 export DISPLAY=$FAKE_DISPLAY
-echo "FAKE_DISPLAY=$FAKE_DISPLAY" &>> log_multiterminal
 
 for i in `seq 0 1`; do
+	# Display for each output
 	DISPLAY_XORGS[$WINDOW_COUNTER]=:$((WINDOW_COUNTER+10))
 
+	# Run Xephyr to type in this output
 	Xephyr ${DISPLAY_XORGS[$WINDOW_COUNTER]} -output ${OUTPUTS[$WINDOW_COUNTER]} -noxv &
-	sleep 2
+	sleep 2 # TODO
 
+	# Export display and create a window to write on this output
 	export DISPLAY=${DISPLAY_XORGS[$WINDOW_COUNTER]}
 	$CREATE_WINDOW
+
+	# Again: the fake_seat display needs to be exported
 	export DISPLAY=$FAKE_DISPLAY
 done
 
-if [ "$(cat "/sys$(udevadm info /sys/class/drm/card0 | grep "P:" | cut -d " " -f2)/card0-VGA-1/status")" == "connected" ]; then
-	execute_Xorg :$(($WINDOW_COUNTER+10))
-	sleep 1
-
-	$CREATE_WINDOW
-	ONBOARD=1
-fi
+#loginctl seat-status seat-V0 | grep $(echo "/sys/devices/pci0000:00/0000:00:1a.0/usb1/1-1/1-1.2/1-1.2.2/1-1.2.2:1.0/0003:04B3:310C.0008/input/input10" | rev | cut -d "/" -f1 | rev)
 
 configure_devices
 
-echo "$ONBOARD" >> log_onboard
-
-# por que wait -n retorna sem terminar nenhum processo na primeira vez?
+# Wait until all seats are configured
 N_SEATS_LISTED=$(($(loginctl list-seats | grep -c "seat-")+$ONBOARD))
 CONFIGURED_SEATS=0
 while [[ $CONFIGURED_SEATS -le $N_SEATS_LISTED ]]; do

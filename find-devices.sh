@@ -12,17 +12,7 @@ find_keyboard () {
 	wNum=$(($fKey-1))
 	ONBOARD=$2
 
-	## Discovers secondary seats (equivalent to how many monitors are connected)
-	#N_SEATS_LISTED=0
-	#while read cSeat; do
-	#	SEATS_LISTED[$N_SEATS_LISTED]=$cSeat
-	#	N_SEATS_LISTED=$(($N_SEATS_LISTED+1))
-	#done < <(loginctl list-seats | grep "seat-")
-	#SEATS_LISTED[$N_SEATS_LISTED]="seat0"
-
-	#SEAT_NAME=${SEATS_LISTED[$wNum]}
-
-	echo "Starting configuration: F$fKey : $SEAT_NAME"
+	SEATS_LISTED=(seat0 $(loginctl list-seats | grep seat-))
 
 	CREATED=0
 	while (( ! CREATED )); do
@@ -40,7 +30,6 @@ find_keyboard () {
 
 		# See if someone presses the key:
 		PRESSED=$($READ_DEVICES $fKey $KEYBOARDS | grep '^detect' | cut -d'|' -f2)
-		echo "PRESSED=$PRESSED"
 
 		if [ -z "$PRESSED" ]; then # if $READ_DEVICES gets killed the script won't do bad stuff
 		    continue
@@ -72,8 +61,6 @@ find_keyboard () {
 		# Now we know the seat/output
 		SEAT_NAME=${SEATS_LISTED[$wNum]}
 
-		echo -ne "\n#Keyboard: $SYS_DEV $SEAT_NAME" >> log_teste
-
 		loginctl attach $SEAT_NAME $SYS_DEV
 
 		find_mouse $fKey $SEAT_NAME
@@ -91,8 +78,6 @@ find_mouse () {
 
 	CREATED=0
 	TIMEOUT=0
-
-	echo "INICIANDO MOUSE"
 
     while (( ! CREATED && ! TIMEOUT )); do
 		MICE=$($DISCOVER_DEVICES mevdev | cut -f2)
@@ -168,7 +153,6 @@ find_mouse () {
     SYS_DEV=/sys$(udevadm info $PRESSED | grep 'P:' | cut -d ' ' -f2- | sed -r 's/event.*$//g')
 
     if [[ "$CREATED" -eq 1 && -n "$SYS_DEV" ]]; then 
-		echo -ne "\n#Mouse: $SYS_DEV $SEAT_NAME" >> log_teste
 
 		loginctl attach $SEAT_NAME $SYS_DEV
 

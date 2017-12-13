@@ -33,26 +33,21 @@ create_window () {
 	#### Description: Create a window in a specific display.
 	#### PID_WINDOWS, ID_WINDOWS and WINDOW_COUNTER are declared in "multiseat-controller.sh".
 	
-	## Get screen resolution
-	screen_Resolution_X=$(xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/' | cut -d'x' -f1) #/ $(($WINDOW_COUNTER+1)) ))
-	screen_Resolution_Y=x$(xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/' | cut -d'x' -f2)
-	SCREEN_RESOLUTION=$screen_Resolution_X$screen_Resolution_Y
+	# Get screen resolution
+	SCREEN_RESOLUTION=$(xdpyinfo -display ${DISPLAY_XORGS[$WINDOW_COUNTER]} | grep dimensions | sed -r 's/^[^0-9]*([0-9]+x[0-9]+).*$/\1/')
 
+	# Creates a new window and get the pid to destroy the window later
 	WINDOW_NAME=w$(($WINDOW_COUNTER+1))
-
-	## Creates a new window and get the pid to destroy the window later
 	$NEW_WINDOW $SCREEN_RESOLUTION+0+0 $WINDOW_NAME &
-	#PID_WINDOW=$!
-	#$WAIT_PROCESS $PID_WINDOW
-	sleep 1
+	sleep 1 #TODO
 
-	## Get the window id
+	# Get the window id
 	ID_WINDOWS[$WINDOW_COUNTER]=$(xwininfo -name $WINDOW_NAME | grep "Window id" | cut -d ' ' -f4)
 
-	write_window wait_load $WINDOW_COUNTER
-
-	## Increases the number of windows
+	# Increases the number of windows
 	WINDOW_COUNTER=$(($WINDOW_COUNTER+1))
+
+	write_window wait_load $WINDOW_COUNTER
 }
 
 write_window() {
